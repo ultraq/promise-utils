@@ -2,7 +2,7 @@
 promise-utils
 =============
 
-[![Build Status](https://travis-ci.org/ultraq/promise-utils.svg?branch=master)](https://travis-ci.org/ultraq/promise-utils)
+[![Build Status](https://travis-ci.com/ultraq/promise-utils.svg?branch=master)](https://travis-ci.com/ultraq/promise-utils)
 [![Coverage Status](https://coveralls.io/repos/github/ultraq/promise-utils/badge.svg?branch=master)](https://coveralls.io/github/ultraq/promise-utils?branch=master)
 [![npm](https://img.shields.io/npm/v/@ultraq/promise-utils.svg?maxAge=3600)](https://www.npmjs.com/package/@ultraq/promise-utils)
 [![License](https://img.shields.io/github/license/ultraq/promise-utils.svg?maxAge=2592000)](https://github.com/ultraq/promise-utils/blob/master/LICENSE.txt)
