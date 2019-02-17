@@ -1,0 +1,36 @@
+{
+	"env": {
+		"cjs": {
+			"presets": [
+				["@babel/preset-env", {
+					"targets": {
+						"browsers": [
+							"ie 11"
+						]
+					}
+				}]
+			]
+		},
+		"es": {
+			"presets": [
+				["@babel/preset-env", {
+					"modules": false,
+					"targets": {
+						"browsers": [
+							"ie 11"
+						]
+					}
+				}]
+			]
+		},
+		"test": {
+			"presets": [
+				["@babel/preset-env", {
+					"targets": {
+						"node": "8.0.0"
+					}
+				}]
+			]
+		}
+	}
+}
