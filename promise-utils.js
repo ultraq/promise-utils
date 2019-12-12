@@ -45,9 +45,7 @@ export function pad(promise, padMs) {
 			if (elapsed > padMs) {
 				throw error;
 			}
-			return new Promise((resolve, reject) => {
-				setTimeout(() => reject(error), padMs - elapsed);
-			});
+			return new Promise((resolve, reject) => setTimeout(() => reject(error), padMs - elapsed));
 		});
 }
 

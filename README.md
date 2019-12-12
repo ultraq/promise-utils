@@ -37,13 +37,13 @@ the initial delay has elapsed.
 
 ### pad(promise, padMs)
 
-Causes promise resolution to take *at least* as long as the time specified by
-returning a promise chain with the `padMs` value that isn't resolved until both
-the padding promise and the original promise are resolved.
+Causes promise resolution and rejection to take *at least* as long as the time
+specified.  Returns a new promise that will be resolved or rejected after the
+padding time has elapsed.
 
- - **promise**: the Promise to pad out
- - **padMs**: number of milliseconds to have `promise` padded out to, if it
-   resolves too quickly
+ - **promise**: The Promise to pad out
+ - **padMs**: Number of milliseconds to have `promise` padded out to, if it
+   resolves or rejects too quickly.
 
 ### retry(doPromise, numRetries, shouldRetry)
 
