@@ -21,24 +21,34 @@ export function delay(doPromise, delayMs) {
 }
 
 /**
- * Causes promise resolution to take *at least* as long as the time specified by
- * creating a promise chain with the `padMs` value that isn't resolved until
- * both the padding promise and the original promise are resolved.
+ * Causes promise resolution and rejection to take *at least* as long as the
+ * time specified.
  * 
  * @param {Promise} promise
  *   The Promise to pad out.
  * @param {Number} padMs
- *   Number of milliseconds to have `promise` padded out to, if it resolves too
- *   quickly.
- * @return {Promise} A new promise that combines the original and a padding
- *   value to slow resolution from happening.
+ *   Number of milliseconds to have `promise` padded out to, if it resolves or
+ *   rejects too quickly.
+ * @return {Promise} A new promise that will be resolved or rejected after the
+ *   padding time has elapsed.
  */
 export function pad(promise, padMs) {
+	let start = Date.now();
 	return Promise.all([
 		promise,
 		new Promise(resolve => setTimeout(resolve, padMs))
 	])
-		.then(([result]) => result);
+		.then(([result]) => result)
+		.catch(error => {
+			let now = Date.now();
+			let elapsed = now - start;
+			if (elapsed > padMs) {
+				throw error;
+			}
+			return new Promise((resolve, reject) => {
+				setTimeout(() => reject(error), padMs - elapsed);
+			});
+		});
 }
 
 /**
