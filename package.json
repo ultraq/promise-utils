@@ -19,8 +19,8 @@
 	"main": "promise-utils.cjs.js",
 	"scripts": {
 		"lint": "eslint \"*.js\"",
-		"test": "npm run lint && jest",
-		"coverage": "cat ./coverage/lcov.info | coveralls",
+		"test": "jest",
+		"coverage": "cat coverage/lcov.info | coveralls",
 		"build": "npm run build:cjs && npm run build:es",
 		"build:cjs": "BABEL_ENV=cjs babel promise-utils.js --out-file promise-utils.cjs.js --source-maps",
 		"build:es": "BABEL_ENV=es babel promise-utils.js --out-file promise-utils.es.js --source-maps",
