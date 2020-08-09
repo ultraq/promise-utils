@@ -5,6 +5,7 @@ promise-utils
 [![Build Status](https://travis-ci.com/ultraq/promise-utils.svg?branch=master)](https://travis-ci.com/ultraq/promise-utils)
 [![Coverage Status](https://coveralls.io/repos/github/ultraq/promise-utils/badge.svg?branch=master)](https://coveralls.io/github/ultraq/promise-utils?branch=master)
 [![npm](https://img.shields.io/npm/v/@ultraq/promise-utils.svg?maxAge=3600)](https://www.npmjs.com/package/@ultraq/promise-utils)
+[![Bundlephobia minified size](https://img.shields.io/bundlephobia/min/@ultraq/promise-utils)](https://bundlephobia.com/result?p=@ultraq/promise-utils)
 
 A collection of utilities for JavaScript promises.
 
