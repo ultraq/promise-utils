@@ -38,7 +38,7 @@ export function pad(promise, padMs) {
 		promise,
 		new Promise(resolve => setTimeout(resolve, padMs))
 	])
-		.then(([result]) => result)
+		.then(results => results[0])
 		.catch(error => {
 			let now = Date.now();
 			let elapsed = now - start;

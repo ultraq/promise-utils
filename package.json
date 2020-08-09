@@ -1,6 +1,6 @@
 {
 	"name": "@ultraq/promise-utils",
-	"version": "0.4.1",
+	"version": "0.4.2",
 	"description": "A collection of utilities for JavaScript promises",
 	"author": "Emanuel Rabina <emanuelrabina@gmail.com> (http://www.ultraq.net.nz/)",
 	"license": "Apache-2.0",
@@ -27,12 +27,8 @@
 		"build:es": "BABEL_ENV=es babel promise-utils.js --out-file promise-utils.es.js --source-maps",
 		"prepublishOnly": "npm run build"
 	},
-	"dependencies": {
-		"@babel/runtime": "^7.11.2"
-	},
 	"devDependencies": {
 		"@babel/cli": "^7.10.3",
-		"@babel/plugin-transform-runtime": "^7.11.0",
 		"@babel/preset-env": "^7.10.3",
 		"coveralls": "^3.1.0",
 		"eslint": "^7.3.0",
