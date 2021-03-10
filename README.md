@@ -47,11 +47,26 @@ padding time has elapsed.
 
 ### retry(doPromise, numRetries, shouldRetry)
 
-Retry a promise a specified number of times.  Returns a promise that is
-resolved/rejected with the results of the underlying promise, or eventually
-rejected after the number of retries has been reached without success.
+Retry a promise a specified number of times.  A promise that will eventually
+resolve to the value from the retried promise, is rejected with the error from
+the retried promise, or is rejected with an error message with "Maximum number
+of retries reached".
 
  - **doPromise**: A function which returns the promise to be retried.
- - **numRetries**: The number of times a retry should be attempted.
- - **shouldRetry**: When the promise succeeds, this function is called with the
-   result to determine whether or not the promise should be retried.
+ - **numRetries**: The number of times the promise should be retried.
+ - **shouldRetry**: A function called with 2 parameters, the result from a
+   promise resolution and the error from a promise rejection (only 1 will be set
+   each call, depending on whether the promise was resolved/rejected), that
+   should determine whether or not the promise should be retried. eg:
+
+   ```javascript
+   // Retry if a resolved promise result is still in a waiting state
+   function shouldRetry(result, error) {
+     return result && result.waiting;
+   }
+
+   // Retry a rejected promise
+   function shouldRetry(result, error) {
+     return !!error;
+   }
+   ```
