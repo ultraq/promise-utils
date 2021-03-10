@@ -32,17 +32,16 @@ Add an artificial delay to the execution of a promise.  Returns a promise that
 is resolved/rejected with the values of the underlying promise, executed after
 the initial delay has elapsed.
 
- - **doPromise**: A function which performs and returns the promise to be
-   retried.
+ - **doPromise**: A function which returns the promise to be delayed.
  - **delayMs**: Number of milliseconds to delay execution of the promise by.
 
-### pad(promise, padMs)
+### pad(doPromise, padMs)
 
 Causes promise resolution and rejection to take *at least* as long as the time
 specified.  Returns a new promise that will be resolved or rejected after the
 padding time has elapsed.
 
- - **promise**: The Promise to pad out
+ - **doPromise**: A function which returns the promise to be padded.
  - **padMs**: Number of milliseconds to have `promise` padded out to, if it
    resolves or rejects too quickly.
 
@@ -52,8 +51,7 @@ Retry a promise a specified number of times.  Returns a promise that is
 resolved/rejected with the results of the underlying promise, or eventually
 rejected after the number of retries has been reached without success.
 
- - **doPromise**: A function which performs and returns the promise to be
-   retried.
+ - **doPromise**: A function which returns the promise to be retried.
  - **numRetries**: The number of times a retry should be attempted.
  - **shouldRetry**: When the promise succeeds, this function is called with the
    result to determine whether or not the promise should be retried.

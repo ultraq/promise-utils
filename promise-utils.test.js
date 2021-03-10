@@ -90,8 +90,7 @@ describe('promise-utils', function() {
 		});
 
 		test("Promises faster than the delay don't resolve until after the delay", async function() {
-			const quickPromise = Promise.resolve('Now!');
-			let paddedPromise = queryablePromise(pad(quickPromise, 1000));
+			let paddedPromise = queryablePromise(pad(() => Promise.resolve('Now!'), 1000));
 
 			expect(paddedPromise.isResolved()).toBe(false);
 			jest.runAllTimers();
@@ -101,12 +100,11 @@ describe('promise-utils', function() {
 
 		test('Promises slower than the delay resolve when they resolve', async function() {
 			const padMs = 1000;
-			const slowPromise = new Promise(resolve => {
+			let paddedPromise = queryablePromise(pad(() => new Promise(resolve => {
 				setTimeout(() => {
 					resolve('Hi!');
 				}, 2000);
-			});
-			let paddedPromise = queryablePromise(pad(slowPromise, padMs));
+			}), padMs));
 
 			jest.advanceTimersByTime(padMs);
 			expect(paddedPromise.isResolved()).toBe(false);

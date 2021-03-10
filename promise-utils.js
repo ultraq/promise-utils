@@ -3,7 +3,7 @@
  * Add an artificial delay to the execution of a promise.
  * 
  * @param {Function} doPromise
- *   A function which performs and returns the promise to be retried.
+ *   A function which returns the promise to be delayed.
  * @param {Number} delayMs
  *   Number of milliseconds to delay execution of the promise by.
  * @return {Promise}
@@ -24,18 +24,18 @@ export function delay(doPromise, delayMs) {
  * Causes promise resolution and rejection to take *at least* as long as the
  * time specified.
  * 
- * @param {Promise} promise
- *   The Promise to pad out.
+ * @param {Function} doPromise
+ *   A function which returns the promise to be padded.
  * @param {Number} padMs
  *   Number of milliseconds to have `promise` padded out to, if it resolves or
  *   rejects too quickly.
  * @return {Promise} A new promise that will be resolved or rejected after the
  *   padding time has elapsed.
  */
-export function pad(promise, padMs) {
+export function pad(doPromise, padMs) {
 	let start = Date.now();
 	return Promise.all([
-		promise,
+		doPromise(),
 		new Promise(resolve => setTimeout(resolve, padMs))
 	])
 		.then(results => results[0])
@@ -53,7 +53,7 @@ export function pad(promise, padMs) {
  * Retry a promise a specified number of times.
  * 
  * @param {Function} doPromise
- *   A function which performs and returns the promise to be retried.
+ *   A function which returns the promise to be retried.
  * @param {Number} numRetries
  *   The number of times a retry should be attempted.
  * @param {Function} shouldRetry
