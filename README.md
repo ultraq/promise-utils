@@ -47,26 +47,38 @@ padding time has elapsed.
 
 ### retry(doPromise, numRetries, shouldRetry)
 
-Retry a promise a specified number of times.  A promise that will eventually
-resolve to the value from the retried promise, is rejected with the error from
-the retried promise, or is rejected with an error message with "Maximum number
-of retries reached".
+Retry a promise based on the result of the `shouldRetry` function.  Returns a
+promise that will eventually resolve to the value or reject with the error from
+the retried promise.
 
  - **doPromise**: A function which returns the promise to be retried.
- - **numRetries**: The number of times the promise should be retried.
- - **shouldRetry**: A function called with 2 parameters, the result from a
-   promise resolution and the error from a promise rejection (only 1 will be set
-   each call, depending on whether the promise was resolved/rejected), that
-   should determine whether or not the promise should be retried. eg:
+ - **shouldRetry**: A function called with the result from a promise resolution
+   (if we are here because the promise was resolved), the error from a promise
+   rejection (if we are here because the promise was rejected), and the number
+   of attempts made thus far.  These can be used to determine if the promise
+   should be retried, and the function can return either a boolean to indicate a
+   retry should be made immediately (`true`), or abandoned (`false`), or a
+   number value to specify a delay in milliseconds of how long until that retry
+   should be attempted (a -1 can also be used to abandon a retry).  eg:
 
    ```javascript
-   // Retry if a resolved promise result is still in a waiting state
-   function shouldRetry(result, error) {
-     return result && result.waiting;
+   // Retry immediately if a resolved promise result is still in a waiting state
+   function shouldRetry(result) {
+     return result && result.waiting ? 0 : -1;
    }
 
-   // Retry a rejected promise
+   // Retry immediately on a rejected promise
    function shouldRetry(result, error) {
      return !!error;
+   }
+
+   // Retry on error up to 2 times (3 attempts total)
+   function shouldRetry(result, error, attempts) {
+     return !!error && attempts < 3;
+   }
+
+   // Retry on error up to 2 times (3 attempts total) with an increasing delay between attempts
+   function shouldRetry(result, error, attempts) {
+     return !!error && attempts < 3 ? attempts * 250 : -1;
    }
    ```
