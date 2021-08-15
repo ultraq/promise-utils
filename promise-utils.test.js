@@ -165,7 +165,7 @@ describe('promise-utils', function() {
 		});
 
 		test('Retry with ever increasing delays between attempts', async function() {
-			const setTimeoutSpy = jest.spyOn(window, 'setTimeout');
+			const setTimeoutSpy = jest.spyOn(global, 'setTimeout');
 
 			const doPromise = jest.fn(() => Promise.resolve({}));
 			const maxAttempts = 5;
