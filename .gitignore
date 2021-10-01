@@ -3,4 +3,5 @@
 /node_modules
 npm-debug.log
 promise-utils.cjs.js*
+promise-utils.d.ts
 promise-utils.es.js*

@@ -10,8 +10,9 @@ describe('promise-utils', function() {
 	 * Wrap a promise with another promise whose status can be queried.  Taken
 	 * from: https://stackoverflow.com/questions/21485545/is-there-a-way-to-tell-if-an-es6-promise-is-fulfilled-rejected-resolved
 	 * 
-	 * @param {Promise} promise
-	 * @return {Promise} A new promise with methods `isFulfilled`, `isResolved`,
+	 * @template T
+	 * @param {Promise<T>} promise
+	 * @return {Promise<T>} A new promise with methods `isFulfilled`, `isResolved`,
 	 *   and `isRejected`.
 	 */
 	function queryablePromise(promise) {

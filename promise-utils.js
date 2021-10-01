@@ -1,12 +1,20 @@
+/**
+ * A function which returns a promise.
+ * 
+ * @template T
+ * @callback PromiseCallback<T>
+ * @return {Promise<T>}
+ */
 
 /**
  * Add an artificial delay to the execution of a promise.
  * 
- * @param {Function} doPromise
+ * @template T
+ * @param {PromiseCallback<T>} doPromise
  *   A function which returns the promise to be delayed.
- * @param {Number} delayMs
+ * @param {number} delayMs
  *   Number of milliseconds to delay execution of the promise by.
- * @return {Promise}
+ * @return {Promise<T>}
  *   A promise that is resolved with the values of the original promise, but
  *   only executed after the initial delay has elapsed.
  */
@@ -24,13 +32,15 @@ export function delay(doPromise, delayMs) {
  * Causes promise resolution and rejection to take *at least* as long as the
  * time specified.
  * 
- * @param {Function} doPromise
+ * @template T
+ * @param {PromiseCallback<T>} doPromise
  *   A function which returns the promise to be padded.
- * @param {Number} padMs
+ * @param {number} padMs
  *   Number of milliseconds to have `promise` padded out to, if it resolves or
  *   rejects too quickly.
- * @return {Promise} A new promise that will be resolved or rejected after the
- *   padding time has elapsed.
+ * @return {Promise<T>} 
+ *   A new promise that will be resolved or rejected after the padding time has
+ *   elapsed.
  */
 export function pad(doPromise, padMs) {
 	let start = Date.now();
@@ -50,11 +60,24 @@ export function pad(doPromise, padMs) {
 }
 
 /**
+ * A function called with the retry context to determine if another retry
+ * attempt should be made.
+ * 
+ * @template T
+ * @callback RetryCallback<T>
+ * @param {T} response
+ * @param {Error} error
+ * @param {number} attempts
+ * @return {boolean | number}
+ */
+
+/**
  * Retry a promise based on the result of the `shouldRetry` function.
  * 
- * @param {Function} doPromise
+ * @template T
+ * @param {PromiseCallback<T>} doPromise
  *   A function which returns the promise to be retried.
- * @param {Function} shouldRetry
+ * @param {RetryCallback<T>} shouldRetry
  *   A function called with the result from a promise resolution (if we are here
  *   because the promise was resolved), the error from a promise rejection (if
  *   we are here because the promise was rejected), and the number of attempts
@@ -85,7 +108,7 @@ export function pad(doPromise, padMs) {
  *     return !!error && attempts < 3 ? attempts * 250 : -1;
  *   }
  *   ```
- * @return {Promise}
+ * @return {Promise<T>}
  *   A promise that will eventually resolve to the value or reject with the
  *   error from the retried promise.
  */
