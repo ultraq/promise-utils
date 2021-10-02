@@ -1,6 +1,6 @@
 {
 	"name": "@ultraq/promise-utils",
-	"version": "0.7.0",
+	"version": "0.6.1",
 	"description": "A collection of utilities for JavaScript promises",
 	"author": "Emanuel Rabina <emanuelrabina@gmail.com> (http://www.ultraq.net.nz/)",
 	"license": "Apache-2.0",
@@ -22,14 +22,15 @@
 		"lint": "eslint \"*.js\"",
 		"test": "jest",
 		"build": "npm run build:cjs && npm run build:es && npm run build:dts",
-		"build:cjs": "BABEL_ENV=cjs babel promise-utils.js --out-file promise-utils.cjs.js --source-maps",
-		"build:es": "BABEL_ENV=es babel promise-utils.js --out-file promise-utils.es.js --source-maps",
+		"build:cjs": "cross-env BABEL_ENV=cjs babel promise-utils.js --out-file promise-utils.cjs.js --source-maps",
+		"build:es": "cross-env BABEL_ENV=es babel promise-utils.js --out-file promise-utils.es.js --source-maps",
 		"build:dts": "tsc --allowJs --declaration --emitDeclarationOnly promise-utils.js",
 		"prepublishOnly": "npm run build"
 	},
 	"devDependencies": {
 		"@babel/cli": "^7.15.7",
 		"@babel/preset-env": "^7.15.6",
+		"cross-env": "^7.0.3",
 		"eslint": "^7.32.0",
 		"eslint-config-ultraq": "^2.4.0",
 		"jest": "^27.2.4",
