@@ -1,6 +1,6 @@
 {
 	"name": "@ultraq/promise-utils",
-	"version": "0.6.2",
+	"version": "0.7.0",
 	"description": "A collection of utilities for JavaScript promises",
 	"author": "Emanuel Rabina <emanuelrabina@gmail.com> (http://www.ultraq.net.nz/)",
 	"license": "Apache-2.0",
@@ -37,6 +37,6 @@
 		"jest": "^27.2.4"
 	},
 	"engines": {
-		"node": ">=12"
+		"node": ">=14"
 	}
 }
