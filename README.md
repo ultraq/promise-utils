@@ -82,3 +82,9 @@ the retried promise.
      return !!error && attempts < 3 ? attempts * 250 : -1;
    }
    ```
+
+### wait(waitMs)
+
+Returns a `Promise` that is resolved only after the given wait period.
+
+ - **waitMs**: Number of milliseconds to wait before the promise is resolved.

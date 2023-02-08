@@ -81,8 +81,8 @@ export function pad(doPromise, padMs) {
  * 
  * @template T
  * @callback RetryCallback<T>
- * @param {T} response
- * @param {Error} error
+ * @param {T | undefined} response
+ * @param {Error | undefined} error
  * @param {number} attempts
  * @return {boolean | number}
  */
@@ -182,5 +182,18 @@ export function retry(doPromise, shouldRetry) {
 				);
 		}
 		makeAttempt();
+	});
+}
+
+/**
+ * Returns a `Promise` that is resolved only after the given wait period.
+ * 
+ * @param {number} waitMs
+ *   Number of milliseconds to wait before the promise is resolved.
+ * @return {Promise<void>}
+ */
+export function wait(waitMs) {
+	return new Promise(resolve => {
+		setTimeout(resolve, waitMs);
 	});
 }

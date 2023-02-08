@@ -15,7 +15,7 @@
  */
 
 /* eslint-env jest */
-import {delay, pad, retry} from './promise-utils.js';
+import {delay, pad, retry, wait} from './promise-utils.js';
 
 /**
  * Tests for the Promises utility module.
@@ -202,6 +202,25 @@ describe('promise-utils', function() {
 			expect(setTimeoutSpy).toHaveBeenCalledWith(expect.any(Function), 1000);
 
 			setTimeoutSpy.mockRestore();
+		});
+	});
+
+	describe('#wait', function() {
+
+		beforeAll(function() {
+			jest.useFakeTimers();
+		});
+		afterAll(function() {
+			jest.useRealTimers();
+		});
+
+		test('Promise resolved only after the wait period', async function() {
+			let waitingPromise = queryablePromise(wait(1000));
+			expect(waitingPromise.isResolved()).toBe(false);
+
+			jest.advanceTimersByTime(1000);
+			await waitingPromise;
+			expect(waitingPromise.isResolved()).toBe(true);
 		});
 	});
 });
