@@ -3,7 +3,7 @@ promise-utils
 =============
 
 [![Build Status](https://github.com/ultraq/promise-utils/actions/workflows/build.yml/badge.svg)](https://github.com/ultraq/promise-utils/actions)
-[![Coverage Status](https://coveralls.io/repos/github/ultraq/promise-utils/badge.svg?branch=main)](https://coveralls.io/github/ultraq/promise-utils?branch=main)
+[![codecov](https://codecov.io/gh/ultraq/promise-utils/branch/main/graph/badge.svg?token=FWOPN1XXZW)](https://codecov.io/gh/ultraq/promise-utils)
 [![npm](https://img.shields.io/npm/v/@ultraq/promise-utils.svg?maxAge=3600)](https://www.npmjs.com/package/@ultraq/promise-utils)
 [![Bundlephobia minified size](https://img.shields.io/bundlephobia/min/@ultraq/promise-utils)](https://bundlephobia.com/result?p=@ultraq/promise-utils)
 
