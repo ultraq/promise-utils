@@ -1,7 +1,5 @@
-/* eslint-env node */
-'use strict'; // eslint-disable-line
-
-module.exports = {
+/** @type {import('jest').Config} */
+const config = {
 	collectCoverage: true,
 	coverageReporters: [
 		'html',
@@ -9,3 +7,5 @@ module.exports = {
 		'text-summary'
 	]
 };
+
+export default config;

@@ -16,22 +16,38 @@
 		"retry",
 		"wait"
 	],
-	"module": "promise-utils.es.js",
-	"main": "promise-utils.cjs.js",
+	"type": "module",
+	"module": "promise-utils.js",
+	"main": "promise-utils.cjs",
 	"types": "promise-utils.d.ts",
+	"exports": {
+		"import": {
+			"default": "./promise-utils.js",
+			"types": "./promise-utils.d.ts"
+		},
+		"require": {
+			"default": "./promise-utils.cjs",
+			"types": "./promise-utils.d.cts"
+		}
+	},
+	"files": [
+		"promise-utils.js",
+		"promise-utils.cjs",
+		"promise-utils.d.ts",
+		"promise-utils.d.cts"
+	],
 	"sideEffects": false,
 	"scripts": {
 		"lint": "eslint \"*.js\"",
 		"test": "jest",
-		"build": "npm run build:cjs && npm run build:es && npm run build:dts",
-		"build:cjs": "cross-env BABEL_ENV=cjs babel promise-utils.js --out-file promise-utils.cjs.js --source-maps",
-		"build:es": "cross-env BABEL_ENV=es babel promise-utils.js --out-file promise-utils.es.js --source-maps",
-		"build:dts": "tsc --allowJs --declaration --emitDeclarationOnly promise-utils.js",
+		"build": "npm run build:cjs && npm run build:dts",
+		"build:cjs": "babel promise-utils.js --out-file promise-utils.cjs",
+		"build:dts": "tsc --allowJs --declaration --emitDeclarationOnly promise-utils.js promise-utils.cjs",
 		"prepublishOnly": "npm run build"
 	},
 	"devDependencies": {
 		"@babel/cli": "^7.20.7",
-		"@babel/preset-env": "^7.20.2",
+		"@babel/plugin-transform-modules-commonjs": "^7.23.3",
 		"@types/jest": "^29.4.0",
 		"cross-env": "^7.0.3",
 		"eslint": "^8.33.0",
