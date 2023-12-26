@@ -19,9 +19,6 @@ Via npm:
 npm install @ultraq/promise-utils
 ```
 
-If targeting browsers that don't natively support `Promise`, a polyfill is
-required.
-
 
 API
 ---
