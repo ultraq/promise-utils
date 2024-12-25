@@ -1,5 +1,7 @@
-/** @type {import('jest').Config} */
-const config = {
+/**
+ * @type {import('jest').Config}
+ */
+export default {
 	collectCoverage: true,
 	coverageReporters: [
 		'html',
@@ -7,5 +9,3 @@ const config = {
 		'text-summary'
 	]
 };
-
-export default config;
